@@ -163,3 +163,82 @@ function retrieveProperties(executionContext) {
         }
     );
 }
+
+
+// ======================================================
+// Retrieve Current Property from Dataverse
+// ======================================================
+
+function retrieveCurrentProperty(executionContext) {
+
+    const formContext = executionContext.getFormContext();
+
+    // Get ID of the Property currently open
+    let propertyId = formContext.data.entity.getId();
+
+    if (!propertyId) {
+
+        console.log(
+            "Property has not been saved yet."
+        );
+
+        return;
+    }
+
+    // Remove { } from GUID
+    propertyId = propertyId.replace(/[{}]/g, "");
+
+    console.log(
+        "Current Property ID:",
+        propertyId
+    );
+
+    Xrm.WebApi.retrieveRecord(
+        "flira_property",
+        propertyId,
+        "?$select=flira_name,flira_towncity,flira_postcode,flira_askingprice"
+    ).then(
+
+        function success(property) {
+
+            console.log(
+                "Current Property retrieved"
+            );
+
+            console.log(
+                "Name:",
+                property.flira_name
+            );
+
+            console.log(
+                "Town:",
+                property.flira_towncity
+            );
+
+            console.log(
+                "Postcode:",
+                property.flira_postcode
+            );
+
+            console.log(
+                "Asking Price:",
+                property.flira_askingprice
+            );
+
+            formContext.ui.setFormNotification(
+                "Current Property retrieved: " +
+                    property.flira_name,
+                "INFO",
+                "CURRENT_PROPERTY"
+            );
+        },
+
+        function error(error) {
+
+            console.error(
+                "Retrieve Property error:",
+                error.message
+            );
+        }
+    );
+}
