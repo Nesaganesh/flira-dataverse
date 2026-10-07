@@ -1,4 +1,4 @@
-from dataverse_client import DataverseApi, DataverseClient
+from src.dataverse_client import DataverseApi, DataverseClient
 
 client = DataverseClient.from_environment()
 api = DataverseApi(client)

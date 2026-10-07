@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from dataverse_client import DataverseApi, DataverseClient
+from src.dataverse_client import DataverseApi, DataverseClient
 
 
 class DataverseClientTests(unittest.TestCase):
