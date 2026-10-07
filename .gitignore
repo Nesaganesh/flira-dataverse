@@ -4,3 +4,19 @@ __pycache__/
 .env
 .DS_Store
 HelpD365.txt
+
+# Python tooling and test artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+
+# .NET build artifacts
+**/bin/
+**/obj/
+*.user
+*.suo
